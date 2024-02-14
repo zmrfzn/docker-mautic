@@ -1,0 +1,41 @@
+version: "3"
+services:
+    mariadb:
+        image: mariadb:10.4
+        container_name: mautic-db-2
+        restart: always
+        ports:
+            - 3306:3306
+        environment:
+            - MYSQL_ROOT_PASSWORD=mypassword
+        volumes:
+            - mysql_data:/var/lib/mysql
+        networks:
+            - mauticnet
+        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    mautic:
+        image: mautic/mautic:5-fpm
+        container_name: mautic-v5-fpm
+        restart: always
+        environment:
+            - MAUTIC_DB_HOST=127.0.0.1:3306
+            - MAUTIC_DB_USER=root
+            - MAUTIC_DB_PASSWORD=mypassword
+            - MAUTIC_DB_NAME=mautic
+            - MAUTIC_RUN_CRON_JOBS=true
+        ports:
+            - 8080:80
+        networks:
+            - mauticnet
+        volumes:
+            - mautic_data:/var/www/html
+        
+        depends_on:
+          - mariadb
+networks:
+    mauticnet:
+        external: true
+        name: mauticnet
+volumes:
+    mysql_data:
+    mautic_data:
