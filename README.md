@@ -1,6 +1,21 @@
-# Mautic Docker image With New Relic
+# Mautic Docker image and examples
 
 _This version refers to Docker images and examples for Mautic 5. If you would like information about older versions, see https://github.com/mautic/docker-mautic/tree/mautic4._
+
+## Build Mautic 5 image with New Relic
+
+### Mautic 5 Apache version
+```bash
+docker build -t "zmrfzn/mautic:5-apache-newrelic" --build-arg NEW_RELIC_AGENT_VERSION=10.16.0.5 --build-arg NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY} --build-arg NEW_RELIC_APPNAME=${NEW_RELIC_APPNAME} --build-arg IMAGE_NAME="mautic/mautic:5-apache" -f Dockerfile .
+```
+
+### Mautic 5 FPM version
+
+```bash
+docker build -t "zmrfzn/mautic:5-fpm-newrelic" --build-arg NEW_RELIC_AGENT_VERSION=10.16.0.5 --build-arg NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY} --build-arg NEW_RELIC_APPNAME=${NEW_RELIC_APPNAME} --build-arg IMAGE_NAME="mautic/mautic:5-fpm" -f Dockerfile .
+```
+
+Follow the Official [New Relic documentation](https://docs.newrelic.com/docs/apm/agents/php-agent/advanced-installation/docker-other-container-environments-install-php-agent/) for additional steps
 
 ## Versions
 
@@ -149,11 +164,3 @@ You can also reach the Mautic community through its [online forums](https://www.
 You are invited to contribute new features, fixes, or updates, large or small; we are always thrilled to receive pull requests, and do our best to process them as fast as we can.
 
 Before you start to code, we recommend discussing your plans through a [GitHub issue](https://github.com/mautic/docker-mautic/issues), especially for more ambitious contributions. This gives other contributors a chance to point you in the right direction, give you feedback on your design, and help you find out if someone else is working on the same thing.
-
-
-## new relic build image
-
-### Mautic 5 Apache version
-```bash
-docker build -t "zmrfzn/mautic:5-apache-newrelic" --build-arg NEW_RELIC_AGENT_VERSION=10.16.0.5 --build-arg NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY} --build-arg NEW_RELIC_APPNAME=${NEW_RELIC_APPNAME} --build-arg IMAGE_NAME="mautic/mautic:5-apache" -f Dockerfile .
-```
